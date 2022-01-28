@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function computerPlay() {
+            const playList = ['rock', 'paper', 'scissor'];
+            let computerChoice = playList[Math.floor(Math.random()*3)]
+            return computerChoice;
+        }
+
+        function playRound(playerSelection, computerSelection) {
+
+            if (playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissor') {
+                console.log('Opponent play ' + computerSelection)
+            } else {
+                return 'Please input the correct play';
+            }
+
+            if (playerSelection === 'rock' && computerSelection === 'paper') {
+                computerScore += 1;
+                return 'You lose! Paper beats rock!';
+            } else if (playerSelection === 'rock' && computerSelection === 'scissor') {
+                playerScore += 1;
+                return 'You win! Rock beats scissor!';
+            } else if (playerSelection === 'paper' && computerSelection === 'rock') {
+                playerScore += 1;
+                return 'You win! Paper beats rock!';
+            } else if (playerSelection === 'paper' && computerSelection === 'scissor') {
+                computerScore += 1;
+                return 'You lose! Scissor beats paper!';
+            } else if (playerSelection === 'scissor' && computerSelection === 'rock') {
+                computerScore += 1;
+                return 'You lose! Rock beats scissor!';
+            } else if (playerSelection === 'scissor' && computerSelection === 'paper') {
+                playerScore += 1;
+                return 'You win! Scissor beats paper';
+            } else if (playerSelection === computerSelection) {
+                return 'Its a draw!';
+            }
+        }
+
+        function roundAsk() {
+            let playerSelection = prompt("Enter your play (rock, paper, scissor) :").toLowerCase();
+            let computerSelection = computerPlay();
+
+            console.log(playRound(playerSelection, computerSelection)); 
+        }
+
+        function game() {
+
+            roundAsk();
+            roundAsk();
+            roundAsk();
+            roundAsk();
+            roundAsk();
+
+            console.log('Player Score : ' + playerScore)
+            console.log('Computer Score : ' + computerScore)
+
+            if (playerScore > computerScore) {
+                console.log('You win!')
+            } else if (playerScore < computerScore) {
+                console.log('You lost!')
+            } else {'Its a draw!'};
+        }
+
+        let playerScore = 0;
+        let computerScore = 0;
+
+        game();
+
+    </script>
+</body>
+</html>
