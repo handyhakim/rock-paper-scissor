@@ -7,6 +7,26 @@
     <title>Document</title>
 </head>
 <body>
+    <div>
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissor">Scissor</button>
+    </div>
+
+    <div>
+        <p>Result : </p>
+        <p class="result"></p>
+        <p class="result2"></p>
+        <p class="result3"></p>
+        <br>
+
+        <div class="tops">
+            <p>Score : </p>
+            <p class="score"></p>
+            <p class="score2"></p>
+        </div>
+    </div>
+
     <script>
         function computerPlay() {
             const playList = ['rock', 'paper', 'scissor'];
@@ -17,7 +37,7 @@
         function playRound(playerSelection, computerSelection) {
 
             if (playerSelection === 'rock' || playerSelection === 'paper' || playerSelection === 'scissor') {
-                console.log('Opponent play ' + computerSelection)
+                result.textContent = 'Opponent play ' + computerSelection;
             } else {
                 return 'Please input the correct play';
             }
@@ -45,36 +65,60 @@
             }
         }
 
-        function roundAsk() {
-            let playerSelection = prompt("Enter your play (rock, paper, scissor) :").toLowerCase();
-            let computerSelection = computerPlay();
+        let playerSelection;
 
-            console.log(playRound(playerSelection, computerSelection)); 
-        }
-
-        function game() {
-
-            roundAsk();
-            roundAsk();
-            roundAsk();
-            roundAsk();
-            roundAsk();
-
-            console.log('Player Score : ' + playerScore)
-            console.log('Computer Score : ' + computerScore)
-
-            if (playerScore > computerScore) {
-                console.log('You win!')
-            } else if (playerScore < computerScore) {
-                console.log('You lost!')
-            } else {'Its a draw!'};
-        }
+        const result = document.querySelector('.result');
+        const result2 = document.querySelector('.result2');
+        const result3 = document.querySelector('.result3');
+        const tops = document.querySelector('.tops');
+        const score = document.querySelector('.score');
+        const score2 = document.querySelector('.score2');
 
         let playerScore = 0;
         let computerScore = 0;
 
-        game();
+        const rock = document.querySelector('.rock');
+        rock.addEventListener('click', () => {
+            playerSelection = 'rock';
+            roundAsk();
+        });
 
+        const paper = document.querySelector('.paper');
+        paper.addEventListener('click', () => {
+            playerSelection = 'paper';
+            roundAsk();
+        });
+
+        const scissor = document.querySelector('.scissor');
+        scissor.addEventListener('click', () => {
+            playerSelection = 'scissor';
+            roundAsk();
+        });
+
+        function roundAsk() {
+            let computerSelection = computerPlay();
+
+            result2.textContent = playRound(playerSelection, computerSelection);
+
+            score.textContent = 'Player Score : ' + playerScore;
+            score2.textContent = 'Computer Score : ' + computerScore;
+
+            if (playerScore > 4 || computerScore > 4) {
+                rock.remove();
+                paper.remove();
+                scissor.remove();
+                tops.remove();
+
+                result.textContent = 'Player Score : ' + playerScore;
+                result2.textContent = 'Computer Score : ' + computerScore;
+
+                if (playerScore > computerScore) {
+                    result3.textContent = 'You win!';
+                } else if (playerScore < computerScore) {
+                    result3.textContent = 'You lose!';
+                } else {'Its a draw!'};
+            };
+        };
     </script>
 </body>
 </html>
